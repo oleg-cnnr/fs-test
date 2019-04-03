@@ -1,3 +1,5 @@
+# ruby-2.5.3
+
 require 'erb'
 require 'ostruct'
 
@@ -5,7 +7,7 @@ class Calculation
   INSURANCE_KINDS = { JOB: 'Работа', LIFE: 'Жизнь', FULL: 'Полное' }.freeze
   RATE = 15 / 1200.0
 
-  def initialize(person, insurance_kind = nil, format = :text)
+  def initialize(person, insurance_kind = 'FULL', format = :text)
     @person = person
     @insurance_kind = insurance_kind
     @loan_amount = @person.goods_cost - @person.downpayment
@@ -70,7 +72,7 @@ class Calculation
     puts "Ежемесячный платеж: #{@monthly_payment.round(2)}"
     puts "Срок кредита: #{@term} месяцев"
     puts "Сумма выплат: #{(@monthly_payment * @term).round(2) }"
-    puts "Страхование: #{INSURANCE_KINDS[@insurance_kind.to_sym]}, #{@insurance_amount&.round(2)}"
+    puts "Страхование: #{INSURANCE_KINDS&.[](@insurance_kind&.to_sym)}, #{@insurance_amount&.round(2)}"
   end
 
   def report_html
