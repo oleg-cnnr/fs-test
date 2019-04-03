@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>Результаты расчета</title>
+    <style>
+      table td {
+        padding: 4px;
+      }
+      table tr:nth-child(even) td{
+        background: #ddd;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h3>Результаты расчета</h3>
+    <table>
+      <tr>
+        <td>Сумма займа:</td>
+        <td><%= @loan_amount.round(2) %></td>
+      </tr>
+      <tr>
+        <td>Первоначальный взнос:</td>
+        <td><%= @person.downpayment %></td>
+      </tr>
+      <tr>
+        <td>Ежемесячный платеж:</td>
+        <td><%= @monthly_payment.round(2) %></td>
+      </tr>
+      <tr>
+        <td>Срок кредита:</td>
+        <td><%= @term%> месяцев</td>
+      </tr>
+      <tr>
+        <td>Сумма выплат:</td>
+        <td><%= (@monthly_payment * @term).round(2) %></td>
+      </tr>
+      <tr>
+        <td>Вид страхования:</td>
+        <td><%= INSURANCE_KINDS[@insurance_kind.to_sym] %></td>
+      </tr>
+      <tr>
+        <td>Премия:</td>
+        <td><%= @insurance_amount&.round(2) %></td>
+      </tr>
+    </table>
+  </body>
+</html>
